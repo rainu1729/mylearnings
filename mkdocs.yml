@@ -1,0 +1,14 @@
+site_name: My Learning Journey
+site_description: A collection of notes and resources on various topics.
+site_author: rainuN
+nav:
+  - Home: index.md
+  - About: about.md
+  - Database:
+      - PLSQL: Database/questions.md
+  - Container: 
+      - Docker: Container/docker.md
+      - Terraform: Container/terraform.md
+  - Scripting:
+      - UnixShell: Scripting/shellscripting.md
+theme: readthedocs
