@@ -5,10 +5,17 @@ nav:
   - Home: index.md
   - About: about.md
   - Database:
-      - PLSQL: Database/questions.md
+      - Oracle: Database/questions.md
+      - Snowflakes: Database/snowflakes.md
+      - CockroachDB: Database/cockroachdb.md
+  - Cloud:
+      - GCP: Cloud/gcp.md
   - Container: 
       - Docker: Container/docker.md
       - Terraform: Container/terraform.md
   - Scripting:
       - UnixShell: Scripting/shellscripting.md
 theme: readthedocs
+plugins: 
+  - search
+  - open-in-new-tab
