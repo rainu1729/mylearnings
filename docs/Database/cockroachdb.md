@@ -212,32 +212,6 @@ output "psql_connection_node1" {
 }
 ```
 
-**Explanation of `main.tf`:**
-
-*   **`terraform { ... }`**: Declares required providers. We need `kreuzwerker/docker`.
-*   **`provider "docker" {}`**: Configures the Docker provider. By default, it connects to your local Docker daemon.
-*   **`docker_network "roachnet"`**: Creates a custom bridge network named `roachnet`. This allows containers to resolve each other by their hostname (`roach1`, `roach2`, `roach3`).
-*   **`docker_volume "roachX_data"`**: Creates named Docker volumes for each node. This ensures data persistence even if containers are removed and recreated.
-*   **`docker_container "roachX"`**: Defines each CockroachDB node as a Docker container.
-    *   `name` & `hostname`: Set to `roachX`.
-    *   `image`: Specifies the CockroachDB Docker image. Using a specific version (e.g., `v23.2.1`) is recommended for consistency.
-    *   `networks_advanced`: Connects the container to the `roachnet` network and sets an alias.
-    *   `ports`: Maps container ports to host ports.
-        *   `26257` is the default SQL port for CockroachDB.
-        *   `8080` is the default DB Console (web UI) port.
-        *   Note how host ports are different for nodes 2 and 3 (`26258`, `8081`, etc.) to avoid conflicts.
-    *   `volumes`: Mounts the persistent Docker volume to `/cockroach/cockroach-data` inside the container.
-    *   `command`: This is the `cockroach start` command.
-        *   `--insecure`: Runs without TLS. **For local dev only.**
-        *   `--join=roach1:26257,roach2:26257,roach3:26257`: Tells each node about the other potential members of the cluster. The hostnames (`roach1`, `roach2`, `roach3`) will resolve within the `roachnet` Docker network.
-        *   `--advertise-addr`: The address this node tells other nodes to use to connect to it. This must be its hostname within the Docker network.
-        *   `--listen-addr=0.0.0.0:26257`: Makes the node listen on all available network interfaces inside the container for SQL connections.
-        *   `--http-addr=0.0.0.0:8080`: Makes the DB Console listen on all interfaces inside the container.
-        *   `--cache` & `--max-sql-memory`: Limits resource usage, good for local development on resource-constrained machines.
-    *   `depends_on`: Ensures `roach1` is attempted to be created before `roach2` and `roach3`. This helps with the initial cluster join process, although CockroachDB is resilient.
-    *   `restart = "unless-stopped"`: Automatically restarts containers if they stop, unless manually stopped.
-*   **`output "..."`**: Defines outputs that Terraform will display after a successful `apply`. These are helpful connection strings and URLs.
-
 **Step 3: Initialize Terraform**
 
 Open your terminal in the `cockroach-tf-docker` directory and run:
@@ -316,18 +290,6 @@ You should see a success message like:
     SHOW RANGES FROM TABLE users; -- See data distribution
     \q
     ```
-
-3.  **SQL Client (using Docker):**
-    If you don't have the client installed locally, you can use the client from a Docker container, connecting to the host network (or the `roachnet` network):
-    ```bash
-    docker run -it --rm --network host cockroachdb/cockroach:v23.2.1 sql --insecure --host=localhost --port=26257
-    ```
-    Or, to connect to the `roachnet` (this is slightly more complex if you're not used to it, but demonstrates inter-container communication):
-    ```bash
-    docker run -it --rm --network cockroach-tf-docker_roachnet cockroachdb/cockroach:v23.2.1 sql --insecure --host=roach1 --port=26257
-    ```
-    (Note: The network name might be `cockroach-tf-docker_roachnet` if your directory is `cockroach-tf-docker`. Check `docker network ls`). The `terraform output` will give you the direct `localhost` connection strings which are easier.
-
 **Step 8: Manage and Clean Up**
 
 *   **View running containers:** `docker ps`
