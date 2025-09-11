@@ -5,9 +5,9 @@ This setup will be **insecure** (no SSL certificates) for simplicity on a local 
 **Prerequisites:**
 
 1.  **Docker Desktop (or Docker Engine):** Ensure Docker is installed and running.
-    *   Install: [Docker Installation](/Container/docker)
+    *   Install: [Docker Installation](/Containerization/docker)
 2.  **Terraform:** Install the Terraform CLI.
-    *   Install: [Terraform Installation](/Container/terraform)
+    *   Install: [Terraform Installation](/Containerization/terraform)
 3.  **Install client tools like DBeaver:**
     *   Install: [DBeaver](https://dbeaver.io/)
 
@@ -20,7 +20,8 @@ This setup will be **insecure** (no SSL certificates) for simplicity on a local 
 
 Create a file named `main.tf` in your `cockroach-tf-docker` directory and paste the following content:
 
-```terraform
+```json
+terraform
 terraform {
   required_providers {
     docker = {

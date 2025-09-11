@@ -58,19 +58,13 @@ docker run hello-world
 * Pull alpine linux image latest version (tag) and open container terminal
 
 ```
-docker run -it alpine
+docker run -it alpine --name MyAlphineContainer
 ```
 
 * List all available images locally
 
 ```
 docker images
-```
-
-* List all running docker containers 
-
-```
-docker ps
 ```
 
 * Login to running container username:rainun containerName:alpine-container-1
@@ -82,3 +76,32 @@ docker exec -it -u rainun alpine-container-1 /bin/ash
 ```
 docker rmi -f image_id
 ```
+
+* Docker list running container
+```
+docker ps 
+docker container ls
+docker container ps 
+```
+* Docker list all container including inactive ones
+```
+docker ps -a
+docker container ls -a
+docker container ps -a
+
+# Display specific columns of the container including size
+docker container ls -a -s --format 'table{{.Names}}\t{{.Size}}\t{{.Status}}'
+
+#Apply filter while displaying containers
+
+#Possible value of docker container status 
+#created, running, paused, restarting, removing, exited, dead
+docker container ls -f "status=exited"
+docker container ls --filter "status=exited"
+
+```
+* Run start a exited container 
+```
+docker start <<ContainerName/ContainerId>>
+```
+

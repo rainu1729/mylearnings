@@ -8,11 +8,12 @@ nav:
       - Oracle: Database/questions.md
       - Snowflakes: Database/snowflakes.md
       - CockroachDB: Database/cockroachdb.md
+      - PostgreSQL: Database/postgresql.md
   - Cloud:
       - GCP: Cloud/gcp.md
   - Container: 
-      - Docker: Container/docker.md
-      - Terraform: Container/terraform.md
+      - Docker: Containerization/docker.md
+      - Terraform: Containerization/terraform.md
   - Scripting:
       - UnixShell: Scripting/shellscripting.md
 theme: readthedocs
