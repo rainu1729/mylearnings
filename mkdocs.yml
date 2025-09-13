@@ -16,6 +16,8 @@ nav:
       - Terraform: Containerization/terraform.md
   - Scripting:
       - UnixShell: Scripting/shellscripting.md
+  - Scheduler:
+      - Airflow: Scheduler/airflow.md
 theme: readthedocs
 plugins: 
   - search
