@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="rainuN" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Airflow - My Learning Journey</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Airflow";
+        var mkdocs_page_input_path = "Scheduler/airflow.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> My Learning Journey
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Database</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/questions/">Oracle</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/snowflakes/">Snowflakes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/cockroachdb/">CockroachDB</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/postgresql/">PostgreSQL</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/gcbigquery/">GCbigquery</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Cloud/gcp/">GCP</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Container</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Containerization/docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Containerization/terraform/">Terraform</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scripting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Scripting/shellscripting/">UnixShell</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scheduler</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Airflow</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#steps">Steps</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#references">References</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">My Learning Journey</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Scheduler</li>
+      <li class="breadcrumb-item active">Airflow</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="setting-up-apache-airflow-locally-with-docker-compose-ubuntu">Setting Up Apache Airflow Locally with Docker Compose (Ubuntu)</h1>
+<p>This guide explains how to quickly spin up Apache Airflow on your local Ubuntu machine using Docker Compose. 
+Ensure Docker and Docker Compose are already installed.</p>
+<h2 id="steps">Steps</h2>
+<p><strong>In a directory of your choice clone the docker compose file (Airflow 3.0.6) and create 3 directories</strong></p>
+<pre><code class="language-bash">curl -LfO 'curl -LfO 'https://airflow.apache.org/docs/apache-airflow/3.0.6/docker-compose.yaml''
+mkdir -p ./dags ./logs ./plugins ./config
+</code></pre>
+<p><strong>Initialize Airflow set the AIRFLOW_UID to current user's id and save in a .env file</strong></p>
+<pre><code class="language-bash">echo -e &quot;AIRFLOW_UID=$(id -u)&quot; &gt; .env
+</code></pre>
+<p><strong>Start Airflow Services</strong></p>
+<pre><code class="language-bash">docker compose up
+</code></pre>
+<p><strong>Access the Airflow Web UI</strong></p>
+<pre><code>Open your browser and go to: (http://localhost:8080)
+
+Default credentials:
+- Username: `airflow`
+- Password: `airflow`
+</code></pre>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html">Official Apache Airflow Docker Setup Guide</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../Scripting/shellscripting/" class="btn btn-neutral float-left" title="UnixShell"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../Scripting/shellscripting/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+      <script src="../../js/open_in_new_tab.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

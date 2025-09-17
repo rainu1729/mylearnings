@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="rainuN" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>GCbigquery - My Learning Journey</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "GCbigquery";
+        var mkdocs_page_input_path = "Database/gcbigquery.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> My Learning Journey
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Database</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../questions/">Oracle</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../snowflakes/">Snowflakes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cockroachdb/">CockroachDB</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../postgresql/">PostgreSQL</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">GCbigquery</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Cloud/gcp/">GCP</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Container</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Containerization/docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Containerization/terraform/">Terraform</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scripting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Scripting/shellscripting/">UnixShell</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scheduler</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Scheduler/airflow/">Airflow</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">My Learning Journey</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Database</li>
+      <li class="breadcrumb-item active">GCbigquery</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><strong>Google BigQuery: Basic Operations</strong></p>
+<p>This guide covers simple operations in Google BigQuery: adding a dataset, creating a table, and uploading data.
+<strong>Some basics commands to run in gcloud commandline</strong></p>
+<pre><code class="language-bash">--list the active account name
+gcloud auth list
+--list the project ID
+gcloud config list project
+</code></pre>
+<p><strong>Add dataset Using Console:</strong></p>
+<p>You can add a dataset using the Google Cloud Console or the <code>bq</code> command-line tool.</p>
+<ol>
+<li>Go to <a href="https://console.cloud.google.com/bigquery">BigQuery Console</a>.</li>
+<li>Select your project.</li>
+<li>Click <strong>Create Dataset</strong>.</li>
+<li>Enter a Dataset ID and configure settings.</li>
+<li>Click <strong>Create Dataset</strong>.</li>
+</ol>
+<p><strong>Using <code>bq</code> CLI:</strong></p>
+<pre><code class="language-bash">bq mk --dataset project_id:dataset_name
+
+--list the datasets if any available in the current project
+
+bq ls
+
+--list dataset available in specific projectid. Eg: bigquery-public-data
+
+bq ls bigquery-public-data:
+
+</code></pre>
+<p><strong>Creating a Table</strong></p>
+<p><strong>Using Console:</strong>
+1. Open your dataset.
+2. Click <strong>Create Table</strong>.
+3. Choose source (Empty table, CSV, JSON, etc.).
+4. Define table schema.
+5. Click <strong>Create Table</strong>.</p>
+<p><strong>Using <code>bq</code> CLI:</strong></p>
+<pre><code class="language-bash">bq mk --table project_id:dataset_name.table_name name:STRING age:INTEGER
+
+--list tables in dataset 
+bq ls dataset_name
+
+--removing dataset 
+bq rm -r dataset_name
+
+</code></pre>
+<p><strong>Uploading Data</strong></p>
+<p><strong>Using Console:</strong>
+1. Open your table.
+2. Click <strong>Upload</strong>.
+3. Select file (CSV, JSON, etc.).
+4. Map columns and upload.</p>
+<p><strong>Using <code>bq</code> CLI:</strong></p>
+<pre><code class="language-bash">bq load --source_format=CSV project_id:dataset_name.table_name ./data.csv name:STRING,age:INTEGER
+
+--show table status like record count, storage bytes 
+
+bq show dataset_name.table_name
+</code></pre>
+<p><strong>Reterive the data on public datasets bigquery Studio not commandline</strong></p>
+<pre><code>SELECT COUNT(*) as num_duplicate_rows, * FROM
+`data-to-insights.ecommerce.all_sessions_raw`
+GROUP BY
+fullVisitorId, channelGrouping, time, country, city, totalTransactionRevenue, transactions, timeOnSite, pageviews, sessionQualityDim, date, visitId, type, productRefundAmount, productQuantity, productPrice, productRevenue, productSKU, v2ProductName, v2ProductCategory, productVariant, currencyCode, itemQuantity, itemRevenue, transactionRevenue, transactionId, pageTitle, searchKeyword, pagePathLevel1, eCommerceAction_type, eCommerceAction_step, eCommerceAction_option
+HAVING num_duplicate_rows &gt; 1;
+
+</code></pre>
+<p><strong>Running query on public datasets</strong></p>
+<pre><code class="language-bash">--examine the schema of the Shakespeare table in the samples dataset
+bq show bigquery-public-data:samples.shakespeare
+</code></pre>
+<p><strong>References</strong></p>
+<ul>
+<li><a href="https://cloud.google.com/bigquery/docs">BigQuery Documentation</a></li>
+<li><a href="https://cloud.google.com/bigquery/docs/bq-command-line-tool">bq Command-Line Tool</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../postgresql/" class="btn btn-neutral float-left" title="PostgreSQL"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../Cloud/gcp/" class="btn btn-neutral float-right" title="GCP">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../postgresql/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../Cloud/gcp/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+      <script src="../../js/open_in_new_tab.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
