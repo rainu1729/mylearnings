@@ -69,7 +69,7 @@ docker images
 
 * Login to running container username:rainun containerName:alpine-container-1
 ```
-docker exec -it -u rainun alpine-container-1 /bin/ash
+docker exec -it -u rainun alpine-container-1 /bin/bash
 ```
 
 * Forcefully remove image get the image id from the command docker images

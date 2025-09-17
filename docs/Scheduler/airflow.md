@@ -5,25 +5,25 @@ Ensure Docker and Docker Compose are already installed.
 
 ## Steps
 
-1. **In a directory of your choice clone the docker compose file (Airflow 3.0.6) and create 3 directories**
+**In a directory of your choice clone the docker compose file (Airflow 3.0.6) and create 3 directories**
 ```bash
 curl -LfO 'curl -LfO 'https://airflow.apache.org/docs/apache-airflow/3.0.6/docker-compose.yaml''
 mkdir -p ./dags ./logs ./plugins ./config
 ```
 
-3. **Initialize Airflow set the AIRFLOW_UID to current user's id and save in a .env file**
+**Initialize Airflow set the AIRFLOW_UID to current user's id and save in a .env file**
 ```bash
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```
 
-4. **Start Airflow Services**
+**Start Airflow Services**
 ```bash
 docker compose up
 ```
 
-5. **Access the Airflow Web UI**
+**Access the Airflow Web UI**
 
-    Open your browser and go to: [http://localhost:8080](http://localhost:8080)
+    Open your browser and go to: (http://localhost:8080)
 
     Default credentials:
     - Username: `airflow`

@@ -9,6 +9,7 @@ nav:
       - Snowflakes: Database/snowflakes.md
       - CockroachDB: Database/cockroachdb.md
       - PostgreSQL: Database/postgresql.md
+      - GCbigquery: Database/gcbigquery.md
   - Cloud:
       - GCP: Cloud/gcp.md
   - Container: 
