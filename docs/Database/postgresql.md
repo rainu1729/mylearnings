@@ -276,6 +276,14 @@ docker exec -it my-postgres-container psql -U postgres postgres
 
 You can execute standard SQL commands directly at the `postgres=#` prompt.
 
+
+**Execute a .sql file from command prompt:**
+```bash
+createdb -h localhost -U myuser -p 5432 newdbname
+
+# run a file from psql 
+psql  -h localhost -U myuser -p 5432 newdbname < verify.sql
+```
 ---
 
 ### 2. Basic Concepts: Databases, Schemas, and Tables
@@ -711,23 +719,6 @@ DROP TRIGGER product_price_update_trigger ON products;
 *   `WHEN (condition)`: An optional condition checked *before* executing the `FOR EACH ROW` trigger function. Access `OLD` and `NEW` data.
 *   `EXECUTE FUNCTION function_name()`: Specifies the trigger function to call.
 
----
-
-### 6. Other Concepts
-
-Here are some key topics to learn next:
-
-*   **Joins:** Combining data from multiple tables (`INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `FULL OUTER JOIN`).
-*   **Grouping and Aggregation:** Using `GROUP BY` and aggregate functions (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`) to summarize data.
-*   **Subqueries and Common Table Expressions (CTEs):** Using the result of one query within another.
-*   **Transactions:** Ensuring data consistency with `BEGIN`, `COMMIT`, and `ROLLBACK`.
-*   **Indexes:** Understanding how they improve query performance and how to create them (`CREATE INDEX`). (Note: `PRIMARY KEY` and `UNIQUE` constraints automatically create indexes).
-*   **User Management and Permissions:** Creating users/roles and granting/revoking privileges (`GRANT`, `REVOKE`).
-*   **Performance Tuning:** Using `EXPLAIN` to understand how PostgreSQL executes your queries.
-*   **Advanced Data Types:** Arrays, JSON/JSONB, geometric types, range types, etc.
-
----
-
-### 7. Resources
+### 6. Resources
 
 *   **Sample Repository:** . [DBRepo](https://github.com/rainu1729/pgdbartifact)

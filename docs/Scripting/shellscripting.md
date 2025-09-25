@@ -77,6 +77,16 @@ greet() {
 greet "User"
 ```
 
+### Some common features of bash 
+```bash
+echo "\$1 each" ## escape the character
+$1 each
+
+echo '$1 each' ## $1 was not interpret
+$1 each 
+
+```
+
 ### File and directory permissions 
 Setting up permission and ownership on files and directories 
 
@@ -237,6 +247,5 @@ paste fileone.txt filetwo.txt
 - Display/configure network interfaces:** `ip`
 - Display contents of file at URL:** `curl <url>`
 - Download file from URL:** `wget <url>`
-
 
 
