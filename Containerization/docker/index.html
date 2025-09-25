@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="rainuN" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Docker - My Learning Journey</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Docker";
+        var mkdocs_page_input_path = "Containerization/docker.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> My Learning Journey
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Database</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/questions/">Oracle</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/snowflakes/">Snowflakes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/cockroachdb/">CockroachDB</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/postgresql/">PostgreSQL</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/gcbigquery/">GCbigquery</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Cloud/gcp/">GCP</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Container</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Docker</a>
+    <ul class="current">
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../terraform/">Terraform</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scripting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Scripting/shellscripting/">UnixShell</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scheduler</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Scheduler/airflow/">Airflow</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">My Learning Journey</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Container</li>
+      <li class="breadcrumb-item active">Docker</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p>Some of the useful commands in Docker</p>
+<p><strong>Core Concepts Covered:</strong></p>
+<ol>
+<li>
+<p><strong>Docker Installation:</strong> Install docker on Ubuntu.</p>
+</li>
+<li>
+<p><strong>Basic Commands:</strong> finding, pulling, pushing, and cleaning up images.</p>
+</li>
+</ol>
+<hr />
+<h3 id="essential-daily-docker-commands">Essential Daily Docker Commands</h3>
+<p><strong>1. Docker Installation</strong></p>
+<ul>
+<li>Add Docker's official GPG key:</li>
+</ul>
+<pre><code>sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+</code></pre>
+<ul>
+<li>Add the repository to Apt sources. </li>
+</ul>
+<pre><code>echo \
+  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release &amp;&amp; echo &quot;${UBUNTU_CODENAME:-$VERSION_CODENAME}&quot;) stable&quot; | \
+  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+sudo apt-get update
+</code></pre>
+<ul>
+<li>Install the latest version of docker from repository.</li>
+</ul>
+<pre><code>sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+</code></pre>
+<ul>
+<li>Test run</li>
+</ul>
+<pre><code>sudo docker run hello-world
+</code></pre>
+<ul>
+<li>Add the logged in user to Docker unix group so that current user can run commands without sudo</li>
+</ul>
+<pre><code>sudo usermod -aG docker $USER
+newgrp docker
+#Test the command
+docker run hello-world
+</code></pre>
+<p><strong>2. Basic Commands</strong></p>
+<ul>
+<li>Pull alpine linux image latest version (tag) and open container terminal</li>
+</ul>
+<pre><code>docker run -it alpine --name MyAlphineContainer
+</code></pre>
+<ul>
+<li>List all available images locally</li>
+</ul>
+<pre><code>docker images
+</code></pre>
+<ul>
+<li>Login to running container username:rainun containerName:alpine-container-1</li>
+</ul>
+<pre><code>docker exec -it -u rainun alpine-container-1 /bin/bash
+</code></pre>
+<ul>
+<li>Forcefully remove image get the image id from the command docker images</li>
+</ul>
+<pre><code>docker rmi -f image_id
+</code></pre>
+<ul>
+<li>Docker list running container</li>
+</ul>
+<pre><code>docker ps 
+docker container ls
+docker container ps 
+</code></pre>
+<ul>
+<li>Docker list all container including inactive ones</li>
+</ul>
+<pre><code>docker ps -a
+docker container ls -a
+docker container ps -a
+
+# Display specific columns of the container including size
+docker container ls -a -s --format 'table{{.Names}}\t{{.Size}}\t{{.Status}}'
+
+#Apply filter while displaying containers
+
+#Possible value of docker container status 
+#created, running, paused, restarting, removing, exited, dead
+docker container ls -f &quot;status=exited&quot;
+docker container ls --filter &quot;status=exited&quot;
+
+</code></pre>
+<ul>
+<li>Run start a exited container </li>
+</ul>
+<pre><code>docker start &lt;&lt;ContainerName/ContainerId&gt;&gt;
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../Cloud/gcp/" class="btn btn-neutral float-left" title="GCP"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../terraform/" class="btn btn-neutral float-right" title="Terraform">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../Cloud/gcp/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../terraform/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+      <script src="../../js/open_in_new_tab.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

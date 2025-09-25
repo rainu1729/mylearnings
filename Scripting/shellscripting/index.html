@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="rainuN" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>UnixShell - My Learning Journey</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "UnixShell";
+        var mkdocs_page_input_path = "Scripting/shellscripting.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> My Learning Journey
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Database</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/questions/">Oracle</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/snowflakes/">Snowflakes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/cockroachdb/">CockroachDB</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/postgresql/">PostgreSQL</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Database/gcbigquery/">GCbigquery</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Cloud/gcp/">GCP</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Container</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Containerization/docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Containerization/terraform/">Terraform</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scripting</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">UnixShell</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#basic-commands">Basic Commands</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#groups">Groups</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#group-creation">Group creation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#file-operations">File Operations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#conditional-statements">Conditional Statements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#loops">Loops</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#some-common-features-of-bash">Some common features of bash</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#file-and-directory-permissions">File and directory permissions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sort-and-display-lines">Sort and display lines</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#merging-two-files">Merging two files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#managing-archive-files">Managing archive files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#user-and-system-information">User and System Information</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#navigating-and-working-with-directories">Navigating and Working with Directories</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#monitoring-system-performance-and-status">Monitoring System Performance and Status</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#creating-copying-moving-and-deleting-files">Creating, Copying, Moving, and Deleting Files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#working-with-file-permissions">Working with File Permissions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#displaying-file-and-string-contents">Displaying File and String Contents</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#basic-text-wrangling">Basic Text Wrangling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#displaying-basic-stats">Displaying Basic Stats</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#extracting-lines-of-text-containing-a-pattern">Extracting Lines of Text Containing a Pattern</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#merging-and-extracting-columns">Merging and Extracting Columns</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#compression-and-archiving">Compression and Archiving</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#networking-commands">Networking Commands</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scheduler</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Scheduler/airflow/">Airflow</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">My Learning Journey</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Scripting</li>
+      <li class="breadcrumb-item active">UnixShell</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="sample-shell-script-commands">Sample Shell Script Commands</h1>
+<h3 id="basic-commands">Basic Commands</h3>
+<pre><code class="language-bash"># Print &quot;Hello, World!&quot; to the terminal
+echo &quot;Hello, World!&quot;
+
+# List files in the current directory
+ls -l
+
+# Display the current working directory
+pwd
+</code></pre>
+<h3 id="groups">Groups</h3>
+<pre><code class="language-bash"># List the groups the logged in user is part of 
+id
+#list all groups and users in it
+cat /etc/group
+</code></pre>
+<h3 id="group-creation">Group creation</h3>
+<pre><code class="language-bash"># create a new group 
+addgroup mymaingroup
+
+#
+</code></pre>
+<h3 id="file-operations">File Operations</h3>
+<pre><code class="language-bash"># Create a new file
+touch newfile.txt
+
+# Copy a file
+cp source.txt destination.txt
+
+# Move or rename a file
+mv oldname.txt newname.txt
+
+# Delete a file
+rm unwantedfile.txt
+</code></pre>
+<h3 id="conditional-statements">Conditional Statements</h3>
+<pre><code class="language-bash"># Check if a file exists
+if [ -f &quot;file.txt&quot; ]; then
+    echo &quot;File exists.&quot;
+else
+    echo &quot;File does not exist.&quot;
+fi
+</code></pre>
+<h3 id="loops">Loops</h3>
+<pre><code class="language-bash"># For loop example
+for i in {1..5}; do
+    echo &quot;Iteration $i&quot;
+done
+
+# While loop example
+count=1
+while [ $count -le 5 ]; do
+    echo &quot;Count: $count&quot;
+    ((count++))
+done
+</code></pre>
+<h3 id="functions">Functions</h3>
+<pre><code class="language-bash"># Define and call a function
+greet() {
+    echo &quot;Hello, $1!&quot;
+}
+
+greet &quot;User&quot;
+</code></pre>
+<h3 id="some-common-features-of-bash">Some common features of bash</h3>
+<pre><code class="language-bash">echo &quot;\$1 each&quot; ## escape the character
+$1 each
+
+echo '$1 each' ## $1 was not interpret
+$1 each 
+
+</code></pre>
+<h3 id="file-and-directory-permissions">File and directory permissions</h3>
+<p>Setting up permission and ownership on files and directories </p>
+<p>viewing file permissions </p>
+<pre><code class="language-bash">echo &quot;My sample first file&quot; &gt; mynewfile.txt
+
+ls -l mynewfile.txt
+-rw-r--r-- 1 group user 25 Dec 22 17:47 x
+</code></pre>
+<p><code>-rw-r--r--</code> broken into 4 parts <br />
+If it a directory it will start with <code>d</code> </p>
+<p><code>rw-</code> permission the logged in user has   <br />
+<code>r--</code> permission the mentioned group in has <br />
+<code>r--</code> permission all other users have  </p>
+<p>It means the file <code>mynewfile.txt</code> can be read by any user but only I can write on it and no one can execute the file.</p>
+<p>file permission names  <br />
+<code>r</code> can read the file content <br />
+<code>w</code> can modify the file content<br />
+<code>x</code> can execute the file  </p>
+<p>Directory permission <br />
+<code>r</code> list directory content using <code>ls</code> <br />
+<code>w</code> add or remove files or directories  <br />
+<code>x</code> enter directory using cd command    </p>
+<p>use <code>chmod</code> command to change permissions on file</p>
+<pre><code class="language-bash">chmod go-r mynewfile.txt
+</code></pre>
+<p><code>go-r</code> remove the read permission from the <code>g</code> group and <code>o</code> others. </p>
+<h3 id="sort-and-display-lines">Sort and display lines</h3>
+<p>view the lines in sorted alphanumerically </p>
+<pre><code class="language-bash">sort mynewfile.txt
+</code></pre>
+<p>Drop any lines in the file that are identical and consective. </p>
+<pre><code class="language-bash">uniq mynewfile.txt
+</code></pre>
+<p>Command to specify a pattern and search for lines within a file.</p>
+<pre><code class="language-bash">grep people mynewfile.txt
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-n</code></td>
+<td>along with matching lines print line number</td>
+<td><code>grep -n people mynewfile.txt</code></td>
+</tr>
+<tr>
+<td><code>-c</code></td>
+<td>get the count of matching lines</td>
+<td><code>grep -c people mynewfile.txt</code></td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>ignore the case of the text while matching</td>
+<td><code>grep -i people mynewfile.txt</code></td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>Print all the lines that do not contain the pattern</td>
+<td><code>grep -v people mynewfile.txt</code></td>
+</tr>
+<tr>
+<td><code>-w</code></td>
+<td>Match only if the pattern matches whole words</td>
+<td><code>grep -w people mynewfile.txt</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="merging-two-files">Merging two files</h3>
+<p><code>paste</code> command to view the two files merged together , line-by-line as columns delimited by a <code>Tab</code> character.</p>
+<pre><code class="language-bash">paste fileone.txt filetwo.txt
+</code></pre>
+<h3 id="managing-archive-files">Managing archive files</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-c</code></td>
+<td>Create new archive file</td>
+<td><code>tar -cvf bin.tar /bin</code></td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>Verbosely list files processed</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>Archive file name</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>To see the list of files in the archive</td>
+<td><code>tar -tvf bin.tar</code></td>
+</tr>
+<tr>
+<td><code>-x</code></td>
+<td>To untar the archive or extract files from the archive</td>
+<td><code>tar -xvf bin.tar</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="user-and-system-information">User and System Information</h3>
+<ul>
+<li>Return your user name:** <code>whoami</code></li>
+<li>Return your user and group id:** <code>id</code></li>
+<li>Return operating system name, username, and other info:** <code>uname -a</code></li>
+<li>Display reference manual for a command:** <code>man &lt;command&gt;</code></li>
+<li>List available man pages:** <code>man -k .</code></li>
+<li>Get help on any command:** <code>&lt;command&gt; --help</code></li>
+<li>Return the current date and time:** <code>date</code></li>
+</ul>
+<h3 id="navigating-and-working-with-directories">Navigating and Working with Directories</h3>
+<ul>
+<li>List files and directories by date:** <code>ls -lrt</code></li>
+<li>Find files ending in .sh:** <code>find -name "*.sh"</code></li>
+<li>Return path to present working directory:** <code>pwd</code></li>
+<li>Make a new directory:** <code>mkdir &lt;directory&gt;</code></li>
+<li>Change the current directory:** <code>cd &lt;path&gt;</code></li>
+<li>Remove directory verbosely:** <code>rmdir &lt;directory&gt; -v</code></li>
+</ul>
+<h3 id="monitoring-system-performance-and-status">Monitoring System Performance and Status</h3>
+<ul>
+<li>List running processes and their PIDs:** <code>ps</code>, <code>ps -e</code></li>
+<li>Display resource usage:** <code>top</code></li>
+<li>List mounted file systems and usage:** <code>df</code></li>
+</ul>
+<h3 id="creating-copying-moving-and-deleting-files">Creating, Copying, Moving, and Deleting Files</h3>
+<ul>
+<li>Create or update file timestamp:** <code>touch &lt;file&gt;</code></li>
+<li>Copy a file:** <code>cp &lt;source&gt; &lt;destination&gt;</code></li>
+<li>Move or rename a file:** <code>mv &lt;source&gt; &lt;destination&gt;</code></li>
+<li>Remove a file verbosely:** <code>rm &lt;file&gt; -v</code></li>
+</ul>
+<h3 id="working-with-file-permissions">Working with File Permissions</h3>
+<ul>
+<li>Make file executable for all users:** <code>chmod +x &lt;file&gt;</code></li>
+<li>Make file executable for current user:** <code>chmod u+x &lt;file&gt;</code></li>
+<li>Remove read permissions from group and others:** <code>chmod go-r &lt;file&gt;</code></li>
+</ul>
+<h3 id="displaying-file-and-string-contents">Displaying File and String Contents</h3>
+<ul>
+<li>Display file contents:** <code>cat &lt;file&gt;</code></li>
+<li>Display file contents page-by-page:** <code>more &lt;file&gt;</code></li>
+<li>Display first/last 10 lines:** <code>head -10 &lt;file&gt;</code>, <code>tail -10 &lt;file&gt;</code></li>
+<li>Display string or variable value:** <code>echo "text"</code>, <code>echo "$VARIABLE"</code></li>
+</ul>
+<h3 id="basic-text-wrangling">Basic Text Wrangling</h3>
+<ul>
+<li>Sort lines:** <code>sort &lt;file&gt;</code></li>
+<li>Sort in reverse order:** <code>sort -r &lt;file&gt;</code></li>
+<li>Drop consecutive duplicates:** <code>uniq &lt;file&gt;</code></li>
+</ul>
+<h3 id="displaying-basic-stats">Displaying Basic Stats</h3>
+<ul>
+<li>Count lines:** <code>wc -l &lt;file&gt;</code></li>
+<li>Count words:** <code>wc -w &lt;file&gt;</code></li>
+<li>Count characters:** <code>wc -m &lt;file&gt;</code></li>
+</ul>
+<h3 id="extracting-lines-of-text-containing-a-pattern">Extracting Lines of Text Containing a Pattern</h3>
+<ul>
+<li>Extract lines with pattern (case-insensitive, whole words):** <code>grep -iw &lt;pattern&gt; &lt;file&gt;</code></li>
+<li>Extract lines from all .txt files:** <code>grep -l &lt;pattern&gt; *.txt</code></li>
+</ul>
+<h3 id="merging-and-extracting-columns">Merging and Extracting Columns</h3>
+<ul>
+<li>Merge files line-by-line (tab-delimited):** <code>paste &lt;file1&gt; &lt;file2&gt; ...</code></li>
+<li>Merge files with comma delimiter:** <code>paste -d "," &lt;file1&gt; &lt;file2&gt; ...</code></li>
+<li>Extract column from CSV:** <code>cut -d "," -f &lt;n&gt; &lt;file&gt;</code></li>
+<li>Extract bytes from each line:** <code>cut -b &lt;range&gt; &lt;file&gt;</code></li>
+</ul>
+<h3 id="compression-and-archiving">Compression and Archiving</h3>
+<ul>
+<li>Archive files:** <code>tar -cvf &lt;archive&gt; &lt;files&gt;</code></li>
+<li>Compress files/folders:** <code>zip &lt;archive&gt; &lt;files/folders&gt;</code></li>
+<li>Extract files from zip:** <code>unzip &lt;archive&gt; [-d &lt;directory&gt;]</code></li>
+</ul>
+<h3 id="networking-commands">Networking Commands</h3>
+<ul>
+<li>Print hostname:** <code>hostname</code></li>
+<li>Send packets to URL:** <code>ping &lt;url&gt;</code></li>
+<li>Display/configure network interfaces:** <code>ip</code></li>
+<li>Display contents of file at URL:** <code>curl &lt;url&gt;</code></li>
+<li>Download file from URL:** <code>wget &lt;url&gt;</code></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../Containerization/terraform/" class="btn btn-neutral float-left" title="Terraform"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../Scheduler/airflow/" class="btn btn-neutral float-right" title="Airflow">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../Containerization/terraform/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../Scheduler/airflow/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+      <script src="../../js/open_in_new_tab.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
