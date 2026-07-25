@@ -5,9 +5,9 @@ This setup will be **insecure** (no SSL certificates) for simplicity on a local 
 **Prerequisites:**
 
 1.  **Docker Desktop (or Docker Engine):** Ensure Docker is installed and running.
-    *   Install: [Docker Installation](/Containerization/docker)
+    *   Install: [Docker Installation](../Containerization/docker.md)
 2.  **Terraform:** Install the Terraform CLI.
-    *   Install: [Terraform Installation](/Containerization/terraform)
+    *   Install: [Terraform Installation](../Containerization/terraform.md)
 3.  **Install client tools like DBeaver:**
     *   Install: [DBeaver](https://dbeaver.io/)
 

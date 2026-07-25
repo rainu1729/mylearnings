@@ -4,21 +4,29 @@ site_author: rainuN
 nav:
   - Home: index.md
   - About: about.md
-  - Database:
-      - Oracle: Database/questions.md
-      - Snowflakes: Database/snowflakes.md
-      - CockroachDB: Database/cockroachdb.md
-      - PostgreSQL: Database/postgresql.md
-      - GCbigquery: Database/gcbigquery.md
+  - Databases:
+      - Installation & Setup:
+          - PostgreSQL: Database/postgresql.md
+          - CockroachDB: Database/cockroachdb.md
+          - Oracle: Database/oracle.md
+          - IBM DB2: Database/ibmdb2.md
+      - Use Cases & Operations:
+          - Google BigQuery: Database/gcbigquery.md
+          - Data Lake: Database/datalake.md
   - Cloud:
-      - GCP: Cloud/gcp.md
-  - Container: 
-      - Docker: Containerization/docker.md
-      - Terraform: Containerization/terraform.md
+      - Installation & Setup:
+          - GCP Cloud SDK: Cloud/gcp.md
+  - Containers & IAC:
+      - Installation & Setup:
+          - Docker: Containerization/docker.md
+          - Terraform: Containerization/terraform.md
+          - Kubernetes: Containerization/kubernetes.md
   - Scripting:
-      - UnixShell: Scripting/shellscripting.md
-  - Scheduler:
-      - Airflow: Scheduler/airflow.md
+      - Use Cases & Commands:
+          - Unix Shell: Scripting/shellscripting.md
+  - Schedulers:
+      - Installation & Setup:
+          - Airflow: Scheduler/airflow.md
 theme: readthedocs
 plugins: 
   - search
