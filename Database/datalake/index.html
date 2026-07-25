@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="rainuN" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Data Lake - My Learning Journey</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Data Lake";
+        var mkdocs_page_input_path = "Database/datalake.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> My Learning Journey
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Databases</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" >Installation & Setup</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../postgresql/">PostgreSQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../cockroachdb/">CockroachDB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../oracle/">Oracle</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../ibmdb2/">IBM DB2</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Use Cases & Operations</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../gcbigquery/">Google BigQuery</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Data Lake</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#data-lake-vs-data-warehouse">Data Lake vs. Data Warehouse</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#core-architecture-layers">Core Architecture Layers</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Cloud</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Installation & Setup</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../Cloud/gcp/">GCP Cloud SDK</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Containers & IAC</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Installation & Setup</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../Containerization/docker/">Docker</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../Containerization/terraform/">Terraform</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../Containerization/kubernetes/">Kubernetes</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scripting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Use Cases & Commands</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../Scripting/shellscripting/">Unix Shell</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schedulers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Installation & Setup</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../Scheduler/airflow/">Airflow</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">My Learning Journey</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Databases</li>
+          <li class="breadcrumb-item">Use Cases & Operations</li>
+      <li class="breadcrumb-item active">Data Lake</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="data-lake-concepts-reference-architecture">Data Lake Concepts &amp; Reference Architecture</h1>
+<p>A <strong>Data Lake</strong> is a centralized repository that allows you to store all your structured, semi-structured, and unstructured data at any scale. Unlike a traditional data warehouse, which requires data to be structured before storage (Schema-on-Write), a Data Lake allows you to store data in its raw format and define the structure only when reading it (Schema-on-Read).</p>
+<hr />
+<h2 id="data-lake-vs-data-warehouse">Data Lake vs. Data Warehouse</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">Data Lake</th>
+<th style="text-align: left;">Data Warehouse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Data Format</strong></td>
+<td style="text-align: left;">Raw, unstructured, semi-structured, structured</td>
+<td style="text-align: left;">Structured, processed</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Schema</strong></td>
+<td style="text-align: left;">Schema-on-Read (defined when querying)</td>
+<td style="text-align: left;">Schema-on-Write (defined before loading)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Storage Cost</strong></td>
+<td style="text-align: left;">Relatively low (Object storage like S3, GCS)</td>
+<td style="text-align: left;">Higher (Optimized database storage)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Primary Users</strong></td>
+<td style="text-align: left;">Data Scientists, Data Engineers</td>
+<td style="text-align: left;">Business Analysts, BI Developers</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="core-architecture-layers">Core Architecture Layers</h2>
+<ol>
+<li><strong>Ingestion Layer</strong>: Imports raw data from various sources (databases, APIs, IoT devices, logs).</li>
+<li><strong>Storage Layer</strong>: Scalable, low-cost object storage (e.g., AWS S3, Google Cloud Storage, Azure ADLS Gen2).</li>
+<li><strong>Processing/Compute Layer</strong>: Decoupled query engines that process data (e.g., Apache Spark, Trino, Databricks, BigQuery).</li>
+<li><strong>Metadata &amp; Catalog Layer</strong>: Tracks schemas and file paths (e.g., AWS Glue Catalog, Apache Hive Metastore).</li>
+<li><strong>Consumption Layer</strong>: Analytics tools, BI dashboards, and ML training pipelines.</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../gcbigquery/" class="btn btn-neutral float-left" title="Google BigQuery"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../Cloud/gcp/" class="btn btn-neutral float-right" title="GCP Cloud SDK">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../gcbigquery/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../Cloud/gcp/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+      <script src="../../js/open_in_new_tab.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
